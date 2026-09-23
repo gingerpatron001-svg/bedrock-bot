@@ -17,13 +17,14 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Automatically generate accounts hyper.eagle50 through hyper.eagle58 (total of 9 accounts)
+// Automatically generate accounts gingerpatron001 through gingerpatron005 (total of 5 accounts)
 const botsConfig = [];
-for (let i = 50; i <= 58; i++) {
+for (let i = 1; i <= 5; i++) {
+  const paddedId = String(i).padStart(3, '0');
   botsConfig.push({
-    id: i - 49, // Bot 1 to 9
-    username: `hyper.eagle${i}@outlook.com`,
-    folder: `./profiles/bot${i - 49}`
+    id: i, // Bot 1 to 5
+    username: `gingerpatron${paddedId}@outlook.com`,
+    folder: `./profiles/bot${i}`
   });
 }
 
@@ -293,7 +294,7 @@ app.get('/', (req, res) => {
       </div>
 
       <h1>⚡ MintSMP Multi-Bot Dashboard</h1>
-      <p class="subtitle">Managing 9 Enterprise Accounts (hyper.eagle50 - hyper.eagle58)</p>
+      <p class="subtitle">Managing 5 Enterprise Accounts (gingerpatron001 - gingerpatron005)</p>
 
       <div class="config-bar">
         <div>Server IP: <input type="text" id="serverIp" value="mintsmp.net"></div>
@@ -480,7 +481,7 @@ function startBot(botInfo, host, port) {
   }
 }
 
-// Background Sequential Loop: Checks bots 1 to 9 in order with a 6-second delay between each
+// Background Sequential Loop: Checks bots 1 to 5 in order with a 6-second delay between each
 async function runAutoConnectLoop() {
   while (true) {
     for (let i = 0; i < botsConfig.length; i++) {
@@ -582,7 +583,7 @@ discordClient.on('messageCreate', (message) => {
 
   const args = message.content.split(' ');
   if (args.length < 3) {
-    return message.reply('❌ Invalid format. Use: `!cmd <1-9> <command>` or `!cmd all <command>`');
+    return message.reply('❌ Invalid format. Use: `!cmd <1-5> <command>` or `!cmd all <command>`');
   }
 
   const targetId = args[1].toLowerCase();
