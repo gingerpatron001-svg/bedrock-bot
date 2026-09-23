@@ -29,7 +29,7 @@ for (let i = 1; i <= 5; i++) {
 }
 
 // Ensure profile directories exist for token caching
-botsConfig.forEach(cfg => {
+botsConfig.export = botsConfig.forEach(cfg => {
   if (!fs.existsSync(cfg.folder)) {
     fs.mkdirSync(cfg.folder, { recursive: true });
   }
@@ -633,4 +633,5 @@ discordClient.on('messageCreate', (message) => {
   }
 });
 
-discordClient.login(process.env.DISCORD_TOKEN);
+// Paste your Discord bot token directly here inside the string quotes:
+discordClient.login('YOUR_DISCORD_TOKEN_HERE');
